@@ -1,0 +1,164 @@
+%Identification
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{easylinear}[2023/02/14 easylinear package]
+
+\RequirePackage[utf8]{inputenc}
+% J Kostiuk: This is part of a boilerplate that overleaf always makes for you. 
+\RequirePackage[margin=1in]{geometry}
+% M Kearney: 1 inch margins help three columns of matrices fit.
+\RequirePackage[delims={[]}]{spalign}
+\RequirePackage{amsfonts}
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+\RequirePackage{amsthm}
+\RequirePackage{graphicx}
+% J Kostiuk: these AMS packages are LaTeX packages put together by the American Mathematical Society. They contain fonts, math styles, and pre-built theorem packages often used in their works. 
+\RequirePackage{enumitem}
+%J Kostiuk: this is a package I use to allow me to change the way LaTeX enumerates things. 
+
+\newtheorem{problem}[]{Problem}
+% J Kostiuk: This is me telling LaTeX about my new "theorem environment". I use this to tell LaTeX where I want a problem to be located. LaTeX will handle the numbering automatically. The first argument is what I'll use to call the command; the last argument is what I'm telling LaTeX to typeset.
+
+\let\defaultspalignaligntab\spalignaligntab
+\let\defaultspalignendline\spalignendline
+
+% Commands below developed by M Kearney @michaelkearney55
+
+% \vct creates a bracketed vector using spalign. Cells are delimited by ' ' or ',' while rows are delimited by ';'.
+% eg: \vct{1 2 3} or \vct{1,2,3} or \vct{ 1, 2 ,3}
+\newcommand*{\vct}[1]{
+\let\vctprevaligntab\spalignaligntab
+\let\vctprevendline\spalignendline
+\let\spalignaligntab\defaultspalignaligntab
+\let\spalignendline\defaultspalignendline
+\spalignvector{#1}
+\let\spalignaligntab\vctprevaligntab
+\let\spalignendline\vctprevendline
+}
+
+% \mat creates a bracketed matrix using spalign. Cells are delimited by ' ' or ',' while rows are delimited by ';'.
+% eg: \mat{1 2 3; 4 5 6} or \mat{1,2,3;4,5,6} or \mat{ 1, 2 ,3; 4  5 6}
+\newcommand*{\mat}[1]{
+\let\matprevaligntab\spalignaligntab
+\let\matprevendline\spalignendline
+\let\spalignaligntab\defaultspalignaligntab
+\let\spalignendline\defaultspalignendline
+\spalignmat{#1}
+\let\spalignaligntab\matprevaligntab
+\let\spalignendline\matprevendline
+}
+
+% \amat creates a bracketed last-column augmented matrix using spalign. Cells are delimited by ' ' or ',' while rows are delimited by ';'.
+% eg: \amat{1 2 3; 4 5 6} or \amat{1,2,3;4,5,6} or \amat{ 1, 2 ,3; 4  5 6}
+\newcommand*{\amat}[1]{
+\let\amatprevaligntab\spalignaligntab
+\let\amatprevendline\spalignendline
+\let\spalignaligntab\defaultspalignaligntab
+\let\spalignendline\defaultspalignendline
+\spalignaugmat{#1}
+\let\spalignaligntab\amatprevaligntab
+\let\spalignendline\amatprevendline
+}
+
+% \rowop is an operator representing the operation and optional scaling of rows in a matrix. It shows the operation over a right arrow. It should be used between matrices. An operated_row (optionally scaled by operated_coefficient) is operated on with operator by operand_row (optionally scaled by operand_coefficient) and stored in operated_row. Leave coefficients blank if no scaling is desired.
+% args: #1: NUMBER operated_coefficient
+%       #2: INTEGER operated_row
+%       #3: OPERATOR operator
+%       #4: NUMBER operand_coefficient
+%       #4: INTEGER operand_row
+% eg:   \rowop{}{7}{+}{}{8} adds row 7 to row 8 and stores the result in row 7
+% eg:   \rowop{}{7}{-}{}{8} subtracts row 8 from row 7 and stores the result in row 7
+% eg:   \rowop[5]{7}{+}{}{8} scales row 7 by scalar 5, adds row 8 to the result, and stores that result in row 7
+% eg:   \rowop[-5]{7}{+}{}{8} multiplies row 7 by scalar -5, adds row 8 to the result, and stores that result in row 7
+% eg:   \rowop{}{7}{+}{6}{8} scales row 8 by scalar 6, adds the result to row 7, and stores that result in row 7.
+% eg:   \rowop{}{7}{+}{\frac{1}{6}}{8} scales row 8 by scalar 1/6, adds the result to row 7, and stores that result in row 7.
+% eg:   \rowop{5}{7}{+}{6}{8} scales row 7 by scalar 5, scales row 8 by scalar 6, adds the results together and stors that result in  row 7.
+\newcommand*{\rowop}[5]{\xrightarrow{#1R_#2#3#4R_#5\to R_#2}}
+
+% \rowscale is an operator representing the scaling of a row by a coefficient. It shows the operation over a right arrow. It should be used between matrices.
+% args: #1: NUMBER operand_coefficient
+%       #2: INTEGER operated_row
+% eg:   \rowscale{6}{7} scales row 7 by scalar 6 and stores the result in row 7
+% eg:   \rowscale{-6}{7} scales row 7 by scalar -6 and stores the result in row 7
+% eg:   \rowscale{\frac{1}{6}}{7} scales row 7 by scalar 1/6 and stores the result in row 7
+\newcommand*{\rowscale}[2]{\xrightarrow{#1R_#2\to R_#2}}
+
+% \rowswap is an operator representing the row swap of first_row and second_row. It shows the operation over a right arrow. It should be used between matrices.
+% args: #1: INTEGER first_row
+%       #2: INTEGER second_row
+% eg:   \rowswap{7}{8} displays the swap of rows 7 and 8
+\newcommand*{\rowswap}[2]{\xrightarrow{R_#1\leftrightarrow R_#2}}
+
+% \bracket displays contents with appropriately-sized brackets.
+% args: #1: TEXT the contents to bracket
+% eg:   \bracket{hello} displays '{hello}'
+\newcommand*{\bracket}[1]{\left\{#1\right\}}
+
+% \commadelim redelimits a comma, space, and semi-colon delimited list as a comma delimited list.
+% args: #1: TEXT the contents to redelimit
+% eg:   \commadelim{1 2,3, 4; 5} converts to '1, 2, 3, 4, 5'
+\newcommand*{\commadelim}[1]{%
+\let\prevspalignaligntab\spalignaligntab%
+\let\prevspalignendline\spalignendline%
+\def\spalignaligntab{, }%
+\def\spalignendline{, }%
+\spalignretokenize{#1}%
+\let\spalignaligntab\prevspalignaligntab}
+
+% \set displays a set with appropriately-sized brackets. Set elements are delimited by ' ' or ','.
+% args: #1: 'ELEM ELEM ... ELEM' the space- or comma-seperated set elements
+% eg:   \set{7 8, 9} displays {7, 8, 9}
+\newcommand*{\set}[1]{\bracket{\commadelim{#1}}}
+
+% \set displays a comma-delimited set with a 'where' clause.
+% args: #1: 'ELEM ELEM ... ELEM' the space- or comma-seperated set elements
+%       #2: TEXT the where clause
+% eg:   \set{7 8, 9} displays {7, 8, 9}
+\newcommand*{\setwhere}[2]{\bracket{\left. \commadelim{#1} \right| #2}}
+
+% \infsolset displays the solution set to a consistent system of linear equations with unbounded variables and infinite solutions.
+% args: #1: 'TERM TERM TERM ... TERM' the space-delimited terms of the vector
+%       #2: 'A,B,C,...,Z' the comma-delimited unbounded variables
+% eg:   \infsolset{2a+3b 4b a b}{a,b}
+%\newcommand*{\infsolset}[2]{\left.\left\{\spalignvector{#1}\right| #2\in \mathbb{R}\right\}}
+\newcommand*{\infsolset}[2]{\setwhere{\vct{#1}}{#2\in \mathbb{R}}}
+
+% \unisolset displays the solution set to a consistent system of linear equations with a unique solution.
+% args: #1: 'TERM TERM TERM ... TERM' the space-delimited terms of the vector
+% eg:   \unisolset{1 2 3 4}
+\newcommand*{\unisolset}[1]{\set{\vct{#1}}}
+
+% \vlist displays a comma-separated list of vectors. Vector elements are delimited by ' ' or ',' while vectors are delimited by ';'.
+% args: #1: 'ELEM ... ELEM; ...; ELEM ... ELEM' the space-delimited elements of the semicolon-delimited vectors
+% eg:   \vlist{1 2; 3 4}
+\newcommand*{\vlist}[1]{%
+\let\prevspalignaligntab\spalignaligntab%
+\let\prevspalignendline\spalignendline%
+\def\spalignaligntab{\\}%
+\def\spalignendline{\end{bmatrix}, \begin{bmatrix}}%
+\spalignenv{\begin{bmatrix}}{\end{bmatrix}}{#1}%
+\let\spalignaligntab\prevspalignaligntab%
+\let\spalignendline\prevspalignendline}
+
+
+\newcommand*{\vset}[1]{\bracket{\vlist{#1}}}
+
+% \vspan displays the span of a set of vectors. Vector elements are delimited by ' ' or ',' while vectors are delimited by ';'.
+% args: #1: 'ELEM ... ELEM; ...; ELEM ... ELEM' the space-delimited elements of the semicolon-delimited vectors
+% eg:   \vspan{1 2; 3 4}
+\newcommand*{\vspan}[1]{\text{span}\vset{#1}}%
+
+% \rspan displays a Euclidean vector space of a certain dimension
+% args: #1: INTEGER dimension of the vector space
+% eg:   \rspan{3}
+% eg:   \rspan{n}
+\newcommand*{\rspace}[1]{\mathbb{R}^{#1}}
+
+% NEW COMMANDS
+
+% \paren displays contents with appropriately-sized parentheses.
+% args: #1: TEXT the contents to parenthize
+% eg:   \paren{hello} displays '(hello)'
+\newcommand*{\paren}[1]{\left(#1\right)}
+
+\newcommand*{\dpr}[2]{\vct{#1}\bullet\vct{#2}}

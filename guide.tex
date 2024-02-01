@@ -1,0 +1,243 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%   ___ ___  __  __ ___ ___ _    ___   __  __ ___   %%
+%%  / __/ _ \|  \/  | _ \_ _| |  | __| |  \/  | __|  %%
+%% | (_| (_) | |\/| |  _/| || |__| _|  | |\/| | _|   %%
+%%  \___\___/|_|  |_|_| |___|____|___| |_|  |_|___|  %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Documentation by M Kearney @michaelkearney55
+
+\documentclass{article}
+
+\usepackage{easylinear}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true, 
+    urlcolor=blue,
+}
+
+% LaTeX example styling lifted from user Kiss My Armpit on tex.stackexchange.com
+% usr: https://tex.stackexchange.com/users/19356/kiss-my-armpit
+% src: https://tex.stackexchange.com/questions/155770/printing-latex-command-without-compiling-it
+
+\usepackage{accsupp}
+\newcommand*{\noaccsupp}[1]{\BeginAccSupp{ActualText={}}#1\EndAccSupp{}}
+\usepackage{xcolor}
+\usepackage{showexpl}
+
+\lstdefinestyle{Common}
+{   
+    language={[LaTeX]TeX},
+    numbers=left,
+    numbersep=1em,
+    numberstyle=\tiny\noaccsupp,
+    frame=single,
+    framesep=\fboxsep,
+    framerule=\fboxrule,
+    rulecolor=\color{red},
+    xleftmargin=\dimexpr\fboxsep+\fboxrule,
+    xrightmargin=\dimexpr\fboxsep+\fboxrule,
+    breaklines=true,
+    breakindent=0pt,
+    tabsize=2,
+    columns=flexible,
+    includerangemarker=false,
+    rangeprefix=//\ ,
+}
+
+\lstdefinestyle{A}
+{
+    style=Common,
+    backgroundcolor=\color{yellow!10},
+    keywordstyle=\color{blue}\bf,
+    identifierstyle=\color{black},
+    stringstyle=\color{red},
+    commentstyle=\color{green}
+}
+% End LaTeX example styling
+
+\title{\texttt{easylinear} --- a \LaTeX\ package for Linear Algebra}
+\author{by Michael Kearney}
+\date{2023-02-27 v1.1}
+
+\begin{document}
+
+\maketitle
+
+\section{About the \texttt{easylinear} package}
+The \texttt{easylinear} package was developed by a linear algebra student to make writing \texttt{linear} in \LaTeX\ more \texttt{easy}. It relies heavily on \texttt{spalign} to define a limited set of efficient commands that save keystrokes, improve readability, and match the Octave syntax used in Sage cells more closely. This package is shared as is. The \texttt{easylinear} \LaTeX\ package and associated template are \emph{not} official course material. Use them at your own risk. The package has been thoroughly tested, but there is no guarantee of functionality. Always check your own work. See \texttt{easylinear.sty} for implementation specifics. Send feedback to michael\_kearney@brown.edu.
+
+\section{How to set up \texttt{easylinear}}
+The easiest way to use \texttt{easylinear} is to make a copy of this Overleaf project that you can edit. Open this project, located at \href{http://bit.ly/easylinear}{bit.ly/easylinear}. Click ``Menu" in the upper left corner and ``Copy Project". (If you have already opened this template while signed into Overleaf, you can make a new copy directly from your Overleaf Projects page.) Choose a name for your new project (e.g. "Problem Set 1"). Your new project will contain \texttt{main.tex}, \texttt{README.tex}, and \texttt{easylinear.sty}. Write your document in \texttt{main.tex}. Compile and refer to \texttt{README.tex} for command usage. Do not edit \texttt{easylinear.sty} unless you know what you are doing. If you do mess up \texttt{easylinear.sty}, pull a fresh copy of the template. For more help with \LaTeX\, see Overleaf's guide to \href{https://www.overleaf.com/learn/latex/Learn_LaTeX_in_30_minutes}{Learn \LaTeX\ in 30 minutes}.
+
+\section{Updates to \texttt{easylinear}}
+I may update this package with more functionality. Existing commands will remain. Until indicated here, this Overleaf project is the most up-to-date version. To get the latest version of \texttt{easylinear}, simply copy this project.
+
+\section{Commands in \texttt{easylinear}}
+Use \texttt{easylinear} commands inside a math environment (i.e. inline \verb=$\command$= or display \verb=\[\command\]=). Pass an argument with curly braces like this: \verb=\command{arg}=. Pass multiple arguments with multiple curly braces like this: \verb=\command{arg1}{arg2}{arg3}=
+
+\pagebreak
+\section{Systems of Linear Equations}
+\subsection{Commonly used commands}
+\begin{tabular}{lcclc}
+Input &  Math & \qquad \qquad & Input & Math\\
+\verb|x^2| & $x^2$ & \qquad \qquad & \verb|\to| & $\to$ \\
+\verb|\in| & $\in$ & \qquad \qquad & \verb|\implies| & $\implies$ \\
+\verb|\{| & $\{$ & \qquad \qquad & \verb|\mathbb{R}| & $\mathbb{R}$ \\
+\verb|\}| & $\}$ & \qquad \qquad & \verb|\text{hello}| & $\text{hello}$ \\
+\end{tabular}
+
+\subsection{Linear system: \texttt{\textbackslash spalignsys}}
+This command comes directly from the \texttt{spalign} package. It aligns the terms and operators of a system of equations and makes it easy to parse coefficients. \verb=\spalignsys{}= takes one argument: a system of equations where terms are delimited by spaces or commas and equations are delimited by semicolons. For example:
+\LTXexample[style=A]
+$\spalignsys{2x_1 - 3x_2 + 12x_3 = 3; -4x_1 + 0x_2 + 6x_3 = -10}$
+\endLTXexample
+
+\subsection{Vectors and Matrices}
+Use \verb=\vct{...}= to make a column vector, \verb=\mat{...}= to make a matrix, and \verb=\amat{...}= to make an augmented matrix. Each command takes as an argument the matrix contents delimited like in Octave: delimit elements with spaces and/or commas and delimit rows with semicolons. Spaces collapse into each other and into commas, but commas do not collapse. For example:
+\LTXexample[style=A]
+$\vct{0 1 2}$
+\endLTXexample
+\LTXexample[style=A]
+$\mat{0 1 2 3; 4 5 6 7}$
+\endLTXexample
+\LTXexample[style=A]
+$\mat{0,1 , 2 ,  3;4,5,6,7  ;}$
+\endLTXexample
+\LTXexample[style=A]
+$\amat{0 1 2 3; 4 5 6 7}$
+\endLTXexample
+
+\subsection{Row operations}
+There are three row operation symbol that describe row operations above a right arrow: \verb=\rowop= represents addition/subtraction with optional scaling coefficients, \verb=\rowscale= represents row scaling in-place, and \verb=\rowswap= represents swapping two rows. Note that these commands do not perform row operations just like writing ``$3\times 4$" does not actually compute a result. These operation symbols only represent the row operations you have done independently.
+
+\subsubsection{\texttt{\textbackslash rowop\{\}\{\}\{\}\{\}\{\}}}
+
+\verb=\rowop= takes five arguments: operated\_coefficient, operated\_row, operator, operand\_coefficient, and operand\_row. operated\_row is the row to which operand\_row is being added or subtracted. The result is stored in operated\_row. The arguments are best understood by example:
+
+\LTXexample[style=A]
+\[\amat{0 1 2 3; 1 2 1 -3}
+\rowop{-3}{1}{+}{2}{2}
+\amat{2 1 -4 -15; 1 2 1 -3}\]
+\endLTXexample
+
+Only the row and operator arguments are mandatory. Coefficient arguments can be independently omitted (implying a coefficient of $1$), but their curly brackets must remain. Any operator can be used. For example:
+
+\LTXexample[style=A]
+\[\amat{0 1 2 3; 1 2 1 -3}
+\rowop{}{1}{-}{}{2}
+\amat{-1 -1 1 6; 1 2 1 -3}\]
+\endLTXexample
+
+\subsubsection{\texttt{\textbackslash rowscale\{\}\{\}}}
+\verb=\rowscale= takes two arguments: operand and operated\_row. operated\_row is scaled by operand and stored back in operated\_row.
+
+\LTXexample[style=A]
+\[\amat{0 1 2 3; 1 2 1 -3}
+\rowscale{3}{1}
+\amat{0 3 6 9; 1 2 1 -3}\]
+\endLTXexample
+
+\subsubsection{\texttt{\textbackslash rowswap\{\}\{\}}}
+\verb=\rowswap= takes two arguments: first\_row and second\_row. first\_row and second\_row are swapped.
+
+\LTXexample[style=A]
+\[\amat{0 1 2 3; 1 2 1 -3}
+\rowswap{1}{2}
+\amat{1 2 1 -3; 0 1 2 3}\]
+\endLTXexample
+
+\subsection{Sets and solution sets}
+
+\subsubsection{\texttt{\textbackslash bracket\{\}} and \texttt{\textbackslash set\{\}}}
+\verb=\bracket{}= and \verb=\set{}= surround an arbitrary argument with appropriately sized brackets. \verb=\bracket{}= displays the contents as given, while \verb=\set{}= will clean and comma-delimit the contents as much as possible.
+\LTXexample[style=A]
+$\bracket{\text{Big brackets! }\mat{2 4; 3 2; 7 6}} \quad
+\set{0 1, \vct{9 8},3; \mat{0 1; 9 6}}$
+\endLTXexample
+\subsubsection{\texttt{\textbackslash setwhere\{\}\{\}}}
+\verb=\setwhere= adds a qualifying `such that' statement to \verb=\set= as a second argument. This `such that' statement is not affected by the comma delimitation of \verb=\set=.
+\LTXexample[style=A]
+$\setwhere{\vct{a b} \vct{c d}}{a,b,c,d \in \mathbf{R}}$
+\endLTXexample
+\subsubsection{\texttt{\textbackslash emptyset}}
+For inconsistent systems with no solution, the solution set is the empty set.
+
+\LTXexample[style=A]
+$\amat{1 0 1; 0 0 1}$ has the solution set     $\emptyset$.
+\endLTXexample
+
+\subsubsection{\texttt{\textbackslash unisolset\{\}}}
+
+Use \verb=\unisolset{}= for consistent systems with a unique solution. It takes one argument: the terms of the solution vector delimited with spaces. For example:
+
+\LTXexample[style=A]
+$\amat{1 0 0 1; 0 1 0 2; 0 0 1 3}$ has the solution set $\unisolset{1 2 3}$.
+\endLTXexample
+
+\subsubsection{\texttt{\textbackslash infsolset\{\}\{\}}}
+
+Use \verb=\infsolset{}{}= for consistent systems with infinitely many solutions. The command takes two arguments. Delimit the terms of the solution vector with spaces in the first argument. Delimit the unbound variables with commas in the second argument. For example:
+
+\LTXexample[style=A]
+$\amat{1 -2 3 0; 0 0 0 0; 0 0 0 0}$ sol'n set $\infsolset{2a-3b a b}{a,b}$.
+\endLTXexample
+
+\subsection{Putting it all together}
+This simple example shows how to combine \texttt{easylinear} commands. It may or may not be an example of good writing by this course's standards.
+\LTXexample[style=A]
+\begin{problem}Find the solution set of the linear\\ system $\spalignsys{4x_1 + 2x_2 = 6; 2x_1 + 0x_2 = 4}$.
+\end{problem}
+
+From the linear system we derive the augmented matrix below. Using row operations, we transform it into RREF:
+\begin{align*}
+&\amat{4 2 6; 2 0 4}
+\rowscale{\frac{1}{2}}{2}
+\amat{4 2 6; 1 0 2}
+\rowswap{1}{2}\\~\\
+&\amat{1 0 2; 4 2 6}
+\rowop{}{2}{-}{4}{1}
+\amat{1 0 2; 0 2 -2}
+\rowscale{\frac{1}{2}}{2}\\~\\
+&\amat{1 0 2; 0 1 -1}
+\end{align*}
+Each variable is bound and there are no contradictions. There is one unique solution. This system of equations has the solution set $\unisolset{2 -1}$.
+\endLTXexample
+\pagebreak
+\section{Vector Spaces}
+\subsection{Commonly used commands}
+\begin{tabular}{lcclc}
+Input &  Math & \qquad \qquad & Input & Math\\
+\verb|\oplus| & $\oplus$ & \qquad \qquad & \verb|\bigoplus| & $\bigoplus$ \\
+\verb|\odot| & $\odot$ & \qquad \qquad & \verb|\bigodot| & $\bigodot$ \\
+\end{tabular}
+\subsection{Spans and Linear Combinations}
+\subsubsection{\texttt{\textbackslash vlist\{\}}}
+Use \verb=\vlist= to display a comma-separated list of vectors.
+\LTXexample[style=A]
+$\vlist{0 5 6 3; 5 4 2 7; 9 9 0 4}$
+\endLTXexample
+\subsubsection{\texttt{\textbackslash vset\{\}}}
+Use \verb=\vset= to display a comma-separated set of vectors.
+\LTXexample[style=A]
+$\vset{0 5 6 3; 5 4 2 7; 9 9 0 4}$
+\endLTXexample
+\subsubsection{\texttt{\textbackslash vspan\{\}}}
+Use \verb=\vspan= to display the span of a linear combination of a set of vectors.
+\LTXexample[style=A]
+$\vspan{0 5 6 3; 5 4 2 7; 9 9 0 4}$
+\endLTXexample
+\subsubsection{\texttt{\textbackslash rspace\{\}}}
+Use \verb=\rspace\= to display a Euclidean vector space of a certain dimension.
+\LTXexample[style=A]
+$\rspace{3}$
+\endLTXexample
+\pagebreak
+
+\section{Changelog}
+\begin{itemize}
+    \item[1.0] Published 2/14/23. First release. Added \verb|\mat|, \verb|\amat|, \verb|\rowop|, \verb|\rowscale|, \verb|\rowswap|, \verb|\unisolset|, and \verb|\infsolset| commands.
+    \item[1.1] Published 2/27/23. Added changelog. Added \verb|\vct|, \verb|\set|, \verb|\setwhere|, \verb|\rspan|, \verb|\lincom|, \verb|\vecset|, and \verb|\vspan| commands. Added \verb|\bracket| and \verb|\commadelim| helper commands. Updated \verb|\mat| and \verb|\amat| to reference \verb|spalign| commands directly. Updated \verb|\infsolset| to use helper functions. Updated \verb|{}| as default \verb|spalign| delimiters. Updated README.
+
+\end{itemize}
+\end{document}
