@@ -16,10 +16,6 @@
     urlcolor=blue,
 }
 
-% LaTeX example styling lifted from user Kiss My Armpit on tex.stackexchange.com
-% usr: https://tex.stackexchange.com/users/19356/kiss-my-armpit
-% src: https://tex.stackexchange.com/questions/155770/printing-latex-command-without-compiling-it
-
 \usepackage{accsupp}
 \newcommand*{\noaccsupp}[1]{\BeginAccSupp{ActualText={}}#1\EndAccSupp{}}
 \usepackage{xcolor}
@@ -65,13 +61,13 @@
 \maketitle
 
 \section{About the \texttt{easylinear} package}
-The \texttt{easylinear} package was developed by a linear algebra student to make writing \texttt{linear} in \LaTeX\ more \texttt{easy}. It relies heavily on \texttt{spalign} to define a limited set of efficient commands that save keystrokes, improve readability, and match the Octave syntax used in Sage cells more closely. This package is shared as is. The \texttt{easylinear} \LaTeX\ package and associated template are \emph{not} official course material. Use them at your own risk. The package has been thoroughly tested, but there is no guarantee of functionality. Always check your own work. See \texttt{easylinear.sty} for implementation specifics. Send feedback to michael\_kearney@brown.edu.
+The \texttt{easylinear} package was developed by a linear algebra student to make writing \texttt{linear} in \LaTeX\ more \texttt{easy}. It relies heavily on \texttt{spalign} to define a limited set of efficient commands that save keystrokes, improve readability, and match the Octave syntax used in Sage cells more closely. This package is shared as is. The \texttt{easylinear} \LaTeX\ package and associated template are \emph{not} official course material. Use them at your own risk. The package has been thoroughly tested, but there is no guarantee of functionality. Always check your own work. See \texttt{easylinear.sty} for implementation specifics. Send feedback to michael.andrew.kearney@gmail.com.
 
 \section{How to set up \texttt{easylinear}}
-The easiest way to use \texttt{easylinear} is to make a copy of this Overleaf project that you can edit. Open this project, located at \href{http://bit.ly/easylinear}{bit.ly/easylinear}. Click ``Menu" in the upper left corner and ``Copy Project". (If you have already opened this template while signed into Overleaf, you can make a new copy directly from your Overleaf Projects page.) Choose a name for your new project (e.g. "Problem Set 1"). Your new project will contain \texttt{main.tex}, \texttt{README.tex}, and \texttt{easylinear.sty}. Write your document in \texttt{main.tex}. Compile and refer to \texttt{README.tex} for command usage. Do not edit \texttt{easylinear.sty} unless you know what you are doing. If you do mess up \texttt{easylinear.sty}, pull a fresh copy of the template. For more help with \LaTeX\, see Overleaf's guide to \href{https://www.overleaf.com/learn/latex/Learn_LaTeX_in_30_minutes}{Learn \LaTeX\ in 30 minutes}.
+The easiest way to use \texttt{easylinear} is to make a copy of an Overleaf project that you can edit. Open the project, located at \href{http://bit.ly/easylinear}{bit.ly/easylinear}. Click ``Menu" in the upper left corner and ``Copy Project". (If you have already opened this template while signed into Overleaf, you can make a new copy directly from your Overleaf Projects page.) Choose a name for your new project (e.g. "Problem Set 1"). Your new project will contain \texttt{main.tex}, \texttt{README.tex}, and \texttt{easylinear.sty}. Write your document in \texttt{main.tex}. Compile and refer to \texttt{README.tex} for command usage. Do not edit \texttt{easylinear.sty} unless you know what you are doing. If you do mess up \texttt{easylinear.sty}, pull a fresh copy of the template. For more help with \LaTeX\, see Overleaf's guide to \href{https://www.overleaf.com/learn/latex/Learn_LaTeX_in_30_minutes}{Learn \LaTeX\ in 30 minutes}.
 
 \section{Updates to \texttt{easylinear}}
-I may update this package with more functionality. Existing commands will remain. Until indicated here, this Overleaf project is the most up-to-date version. To get the latest version of \texttt{easylinear}, simply copy this project.
+I may update this package with more functionality. Existing commands will remain. Until indicated here, the Overleaf project is the most up-to-date version. To get the latest version of \texttt{easylinear}, simply copy the project. Depending on maintenance capacity, future updates may be distributed over the fledgeling \href{https://github.com/michaelkearney55/easylinear}{GitHub repository} or CTAN.
 
 \section{Commands in \texttt{easylinear}}
 Use \texttt{easylinear} commands inside a math environment (i.e. inline \verb=$\command$= or display \verb=\[\command\]=). Pass an argument with curly braces like this: \verb=\command{arg}=. Pass multiple arguments with multiple curly braces like this: \verb=\command{arg1}{arg2}{arg3}=
@@ -238,6 +234,12 @@ $\rspace{3}$
 \begin{itemize}
     \item[1.0] Published 2/14/23. First release. Added \verb|\mat|, \verb|\amat|, \verb|\rowop|, \verb|\rowscale|, \verb|\rowswap|, \verb|\unisolset|, and \verb|\infsolset| commands.
     \item[1.1] Published 2/27/23. Added changelog. Added \verb|\vct|, \verb|\set|, \verb|\setwhere|, \verb|\rspan|, \verb|\lincom|, \verb|\vecset|, and \verb|\vspan| commands. Added \verb|\bracket| and \verb|\commadelim| helper commands. Updated \verb|\mat| and \verb|\amat| to reference \verb|spalign| commands directly. Updated \verb|\infsolset| to use helper functions. Updated \verb|{}| as default \verb|spalign| delimiters. Updated README.
-
 \end{itemize}
+
+\section{Acknowledgements}
+Thank you to Joseph Rabinoff, the developer of spalign, around which this package is a thin wrapper.\\
+Thank you to Jordan Kostiuk, whose environment this package uses.\\
+Thank you to Jordan Kostiuk and Sarah Griffith, in whose class this package was developed.\\
+Thank you to \href{https://tex.stackexchange.com/users/19356/kiss-my-armpit}{KissMyArmpit}, from whom this documentation styling \href{https://tex.stackexchange.com/questions/155770/printing-latex-command-without-compiling-it}{was lifted}.\\
+
 \end{document}
