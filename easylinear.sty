@@ -3,17 +3,16 @@
 \ProvidesPackage{easylinear}[2023/02/14 easylinear package]
 
 \RequirePackage[utf8]{inputenc}
-% J Kostiuk: This is part of a boilerplate that overleaf always makes for you. 
-\RequirePackage[margin=1in]{geometry}
 % M Kearney: 1 inch margins help three columns of matrices fit.
 \RequirePackage[delims={[]}]{spalign}
 \RequirePackage{amsfonts}
 \RequirePackage{amsmath}
 \RequirePackage{amssymb}
 \RequirePackage{amsthm}
+\RequirePackage{amscd}
 \RequirePackage{graphicx}
+
 % J Kostiuk: these AMS packages are LaTeX packages put together by the American Mathematical Society. They contain fonts, math styles, and pre-built theorem packages often used in their works. 
-\RequirePackage{enumitem}
 %J Kostiuk: this is a package I use to allow me to change the way LaTeX enumerates things. 
 
 \newtheorem{problem}[]{Problem}
@@ -154,11 +153,13 @@
 % eg:   \rspan{n}
 \newcommand*{\rspace}[1]{\mathbb{R}^{#1}}
 
-% NEW COMMANDS
-
 % \paren displays contents with appropriately-sized parentheses.
 % args: #1: TEXT the contents to parenthize
 % eg:   \paren{hello} displays '(hello)'
 \newcommand*{\paren}[1]{\left(#1\right)}
 
+% \dpr displays the dot product.
+% args: #1: INTEGER contents of the first vector
+%           INTEGER contents of the second vector
+% eg:   \dpr{1 2 3}{4, 5, 6}
 \newcommand*{\dpr}[2]{\vct{#1}\bullet\vct{#2}}

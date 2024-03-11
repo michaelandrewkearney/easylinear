@@ -54,27 +54,25 @@
 
 \title{\texttt{easylinear} --- a \LaTeX\ package for Linear Algebra}
 \author{by Michael Kearney}
-\date{2023-02-27 v1.1}
+\date{2024-03-11 v1.2}
 
 \begin{document}
 
 \maketitle
 
 \section{About the \texttt{easylinear} package}
-The \texttt{easylinear} package was developed by a linear algebra student to make writing \texttt{linear} in \LaTeX\ more \texttt{easy}. It relies heavily on \texttt{spalign} to define a limited set of efficient commands that save keystrokes, improve readability, and match the Octave syntax used in Sage cells more closely. This package is shared as is. The \texttt{easylinear} \LaTeX\ package and associated template are \emph{not} official course material. Use them at your own risk. The package has been thoroughly tested, but there is no guarantee of functionality. Always check your own work. See \texttt{easylinear.sty} for implementation specifics. Send feedback to michael.andrew.kearney@gmail.com.
+The \texttt{easylinear} package was developed by a linear algebra student to make writing \texttt{linear} in \LaTeX\ more \texttt{easy}. It was developed specifically for students of MATH0520 at Brown University, and some conventions in this package may be course-specific. It relies heavily on \href{https://ctan.org/pkg/spalign}{\texttt{spalign} by Joseph Rabinoff} to define a limited set of efficient commands that save keystrokes, improve readability, and match the Octave syntax used in Sage cells more closely. This package is shared as is. The \texttt{easylinear} \LaTeX\ package and associated template are \emph{not} official course material. Use them at your own risk. The package has been thoroughly tested, but there is no guarantee of functionality. Always check your own work. See \texttt{easylinear.sty} for implementation specifics. Send feedback to michaelandrewkearney at gmail dot com.
 
 \section{How to set up \texttt{easylinear}}
 The easiest way to use \texttt{easylinear} is to make a copy of an Overleaf project that you can edit. Open the project, located at \href{http://bit.ly/easylinear}{bit.ly/easylinear}. Click ``Menu" in the upper left corner and ``Copy Project". (If you have already opened this template while signed into Overleaf, you can make a new copy directly from your Overleaf Projects page.) Choose a name for your new project (e.g. "Problem Set 1"). Your new project will contain \texttt{main.tex}, \texttt{README.tex}, and \texttt{easylinear.sty}. Write your document in \texttt{main.tex}. Compile and refer to \texttt{README.tex} for command usage. Do not edit \texttt{easylinear.sty} unless you know what you are doing. If you do mess up \texttt{easylinear.sty}, pull a fresh copy of the template. For more help with \LaTeX\, see Overleaf's guide to \href{https://www.overleaf.com/learn/latex/Learn_LaTeX_in_30_minutes}{Learn \LaTeX\ in 30 minutes}.
 
 \section{Updates to \texttt{easylinear}}
-I may update this package with more functionality. Existing commands will remain. Until indicated here, the Overleaf project is the most up-to-date version. To get the latest version of \texttt{easylinear}, simply copy the project. Depending on maintenance capacity, future updates may be distributed over the fledgeling \href{https://github.com/michaelkearney55/easylinear}{GitHub repository} or CTAN.
+I may update this package with more functionality. Existing commands will remain. Until indicated here, the Overleaf project is the most up-to-date version. To get the latest version of \texttt{easylinear}, simply copy the project. Depending on maintenance capacity, future updates may be distributed over the fledgeling \href{https://github.com/michaelandrewkearney/easylinear}{GitHub repository} or CTAN.
 
 \section{Commands in \texttt{easylinear}}
 Use \texttt{easylinear} commands inside a math environment (i.e. inline \verb=$\command$= or display \verb=\[\command\]=). Pass an argument with curly braces like this: \verb=\command{arg}=. Pass multiple arguments with multiple curly braces like this: \verb=\command{arg1}{arg2}{arg3}=
 
-\pagebreak
-\section{Systems of Linear Equations}
-\subsection{Commonly used commands}
+\section{Common commands}
 \begin{tabular}{lcclc}
 Input &  Math & \qquad \qquad & Input & Math\\
 \verb|x^2| & $x^2$ & \qquad \qquad & \verb|\to| & $\to$ \\
@@ -82,13 +80,19 @@ Input &  Math & \qquad \qquad & Input & Math\\
 \verb|\{| & $\{$ & \qquad \qquad & \verb|\mathbb{R}| & $\mathbb{R}$ \\
 \verb|\}| & $\}$ & \qquad \qquad & \verb|\text{hello}| & $\text{hello}$ \\
 \end{tabular}
+\subsubsection{\texttt{\textbackslash paren\{\}}}
+Use \verb=\paren= to display something in appropriately-sized parentheses.
+\LTXexample[style=A]
+$\paren{\dfrac{x}{y}}$
+\endLTXexample
 
+\pagebreak
+\section{Systems of Linear Equations}
 \subsection{Linear system: \texttt{\textbackslash spalignsys}}
 This command comes directly from the \texttt{spalign} package. It aligns the terms and operators of a system of equations and makes it easy to parse coefficients. \verb=\spalignsys{}= takes one argument: a system of equations where terms are delimited by spaces or commas and equations are delimited by semicolons. For example:
 \LTXexample[style=A]
 $\spalignsys{2x_1 - 3x_2 + 12x_3 = 3; -4x_1 + 0x_2 + 6x_3 = -10}$
 \endLTXexample
-
 \subsection{Vectors and Matrices}
 Use \verb=\vct{...}= to make a column vector, \verb=\mat{...}= to make a matrix, and \verb=\amat{...}= to make an augmented matrix. Each command takes as an argument the matrix contents delimited like in Octave: delimit elements with spaces and/or commas and delimit rows with semicolons. Spaces collapse into each other and into commas, but commas do not collapse. For example:
 \LTXexample[style=A]
@@ -102,6 +106,11 @@ $\mat{0,1 , 2 ,  3;4,5,6,7  ;}$
 \endLTXexample
 \LTXexample[style=A]
 $\amat{0 1 2 3; 4 5 6 7}$
+\endLTXexample
+\subsubsection{\texttt{\textbackslash dpr\{\}}}
+Use \verb=\dpr= to display the dot product of two vectors.
+\LTXexample[style=A]
+$\dpr{2 4 5}{3, 8, 0}$
 \endLTXexample
 
 \subsection{Row operations}
@@ -148,8 +157,10 @@ Only the row and operator arguments are mandatory. Coefficient arguments can be 
 \subsubsection{\texttt{\textbackslash bracket\{\}} and \texttt{\textbackslash set\{\}}}
 \verb=\bracket{}= and \verb=\set{}= surround an arbitrary argument with appropriately sized brackets. \verb=\bracket{}= displays the contents as given, while \verb=\set{}= will clean and comma-delimit the contents as much as possible.
 \LTXexample[style=A]
-$\bracket{\text{Big brackets! }\mat{2 4; 3 2; 7 6}} \quad
-\set{0 1, \vct{9 8},3; \mat{0 1; 9 6}}$
+$\bracket{\text{Big brackets! }\mat{2 4; 3 2; 7 6}}$
+\endLTXexample
+\LTXexample[style=A]
+$\set{0 1, \vct{9 8},3; \mat{0 1; 9 6}}$
 \endLTXexample
 \subsubsection{\texttt{\textbackslash setwhere\{\}\{\}}}
 \verb=\setwhere= adds a qualifying `such that' statement to \verb=\set= as a second argument. This `such that' statement is not affected by the comma delimitation of \verb=\set=.
@@ -224,7 +235,7 @@ Use \verb=\vspan= to display the span of a linear combination of a set of vector
 $\vspan{0 5 6 3; 5 4 2 7; 9 9 0 4}$
 \endLTXexample
 \subsubsection{\texttt{\textbackslash rspace\{\}}}
-Use \verb=\rspace\= to display a Euclidean vector space of a certain dimension.
+Use \verb=\rspace= to display a Euclidean vector space of a certain dimension.
 \LTXexample[style=A]
 $\rspace{3}$
 \endLTXexample
@@ -234,6 +245,7 @@ $\rspace{3}$
 \begin{itemize}
     \item[1.0] Published 2/14/23. First release. Added \verb|\mat|, \verb|\amat|, \verb|\rowop|, \verb|\rowscale|, \verb|\rowswap|, \verb|\unisolset|, and \verb|\infsolset| commands.
     \item[1.1] Published 2/27/23. Added changelog. Added \verb|\vct|, \verb|\set|, \verb|\setwhere|, \verb|\rspan|, \verb|\lincom|, \verb|\vecset|, and \verb|\vspan| commands. Added \verb|\bracket| and \verb|\commadelim| helper commands. Updated \verb|\mat| and \verb|\amat| to reference \verb|spalign| commands directly. Updated \verb|\infsolset| to use helper functions. Updated \verb|{}| as default \verb|spalign| delimiters. Updated README.
+    \item[1.2] Published 3/11/24. Added \verb|\dpr| and \verb|\paren|. Added to github. Updated Overleaf template. Updated for Brown CS1420.
 \end{itemize}
 
 \section{Acknowledgements}
